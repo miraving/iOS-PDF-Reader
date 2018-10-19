@@ -20,13 +20,13 @@ internal final class PDFPageView: UIScrollView {
     private var tiledPDFView: TiledView
     
     /// Current scale of the scrolling view
-    private var scale: CGFloat
+    fileprivate var scale: CGFloat
     
     /// Number of zoom levels possible when double tapping
     private let zoomLevels: CGFloat = 2
     
     /// View which contains all of our content
-    private var contentView: UIView
+    fileprivate var contentView: UIView
     
     /// A low resolution image of the PDF page that is displayed until the TiledPDFView renders its content.
     private let backgroundImageView: UIImageView
@@ -87,7 +87,7 @@ internal final class PDFPageView: UIScrollView {
         }
         
         contentView.addSubview(backgroundImageView)
-        contentView.sendSubviewToBack(backgroundImageView)
+        contentView.sendSubview(toBack: backgroundImageView)
         contentView.addSubview(tiledPDFView)
         addSubview(contentView)
         
@@ -104,7 +104,7 @@ internal final class PDFPageView: UIScrollView {
         singleTapOne.require(toFail: doubleTapOne)
         
         bouncesZoom = false
-        decelerationRate = UIScrollView.DecelerationRate.fast
+        decelerationRate = UIScrollView.DecelerationRate.hash
         delegate = self
         autoresizesSubviews = true
         autoresizingMask = [.flexibleHeight, .flexibleWidth]
